@@ -25,6 +25,7 @@ import 'package:my_app/View/Auth/sign_up.dart';
 
 import '../View/Auth/newpasswordpage.dart';
 import '../View/Auth/verificationpage.dart';
+import '../View/Splash/splash.dart';
 import '../View/homepage/overview.dart';
 
 part 'app_routes.dart';
@@ -32,13 +33,13 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  final initial = Routes.login;
+  final initial = Routes.splash;
 
   static final routes = [
-    // GetPage(
-    //   name: _Paths.splash,
-    //   page: SplashScreen.new,
-    // ),
+    GetPage(
+      name: _Paths.splash,
+      page: SplashScreen.new,
+    ),
     GetPage(
       name: _Paths.login,
       page: LoginPage.new,
