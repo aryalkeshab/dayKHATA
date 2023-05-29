@@ -23,14 +23,19 @@ class _VerificationpageState extends State<Verificationpage> {
           color: Color.fromRGBO(30, 60, 87, 1),
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
+        color: const Color.fromRGBO(234, 239, 243, 1),
+        border: Border.all(color: primarycolor
+            // color: Color.fromARGB(255, 2, 134, 241),
+            ),
+        borderRadius: BorderRadius.circular(50),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(20),
+      border: Border.all(
+        color: Color.fromARGB(255, 2, 134, 241),
+      ),
+      borderRadius: BorderRadius.circular(50),
     );
 
     final submittedPinTheme = defaultPinTheme.copyWith(
@@ -138,7 +143,7 @@ class _VerificationpageState extends State<Verificationpage> {
                 defaultPinTheme: defaultPinTheme,
                 focusedPinTheme: focusedPinTheme,
                 submittedPinTheme: submittedPinTheme,
-
+                keyboardType: TextInputType.number,
                 // validator: (s) {
                 //    return s == '2222' ? null : 'Pin is incorrect';
                 // },
