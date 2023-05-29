@@ -77,7 +77,7 @@ class Forgetpassword extends StatelessWidget {
               height: 10,
             ),
             CustomTextField(
-              hint: "Email Address",
+              hint: "Email address",
               leadingIcon: const Icon(
                 Icons.email,
               ),

@@ -89,6 +89,8 @@ class _SignupState extends State<Signup> {
                 onTap: () {
                   Get.toNamed(Routes.login);
                 },
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 child: RichText(
                   text: TextSpan(
                     text: "Already have an account? ",
