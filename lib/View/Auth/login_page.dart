@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/View/Payment/amount_received.dart';
 import 'package:my_app/View/Auth/forgotpassword.dart';
 import 'package:get/get.dart';
+import 'package:my_app/View/Splash/splash.dart';
 import '../../utils/app_pages.dart';
 import '../../utils/constants.dart';
 import '../../widgets/buttons.dart';
