@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Screen/Auth/Model/Response/login_response.dart';
 import '../../Screen/Auth/Model/Request/login_params.dart';
 import '../../Screen/Auth/Model/Request/register_params.dart';
 import '../api/api_client.dart';
@@ -34,27 +35,10 @@ class ApiRequest {
         // await secureStorage.write(
         //     key: Constants.accessToken, value: accessToken);
 
-        if (response["status"] == true) {
-          const message = "User Logged in  Successfully!!";
-          return ApiResponse(
-            data: message,
-          );
-        } else {
-          const message = "username or password invalid";
-        }
-        // if (response["status"] == true) {
-        //   final message = response["message"].toString();
-        //   return ApiResponse(data: message);
-        // } else {
-        //   final errorMessage = response["message"] ?? "Login failed".toString();
-        //   return ApiResponse(error: errorMessage);
-        // }
+        return ApiResponse(data: response);
       } catch (e) {
-        //this executes continiously
-        print('Error : $e');
+        // print('Error : $e');
         return ApiResponse(error: NetworkException.getException(e));
-
-        // return ApiResponse(error: 'error occurred');
       }
     } else {
       return ApiResponse(error: NetworkException.noInternetConnection());
@@ -64,20 +48,13 @@ class ApiRequest {
   Future<dynamic> register(RegisterParams registerParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await _apiClient.authPost(
+        final response = await _apiClient.post(
             APIPathHelper.authAPIs(
               APIPath.register,
             ),
             data: registerParams.toJson());
-        // return ApiResponse(
-        //   data: response,
-        // );
-        if (response["status"] == true) {
-          const message = "User Registered Successfully!!";
-          return ApiResponse(
-            data: message,
-          );
-        }
+
+        return ApiResponse(data: response);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
       }

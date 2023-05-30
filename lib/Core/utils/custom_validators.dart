@@ -20,6 +20,8 @@ class Validator {
     // final regExp = RegExp(pattern);
     if (value.isEmpty) {
       return "Password is required";
+    } else if (value.length < 5) {
+      return "Password length must be more than 6";
     }
     return null;
 

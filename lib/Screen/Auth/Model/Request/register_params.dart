@@ -11,7 +11,7 @@ class RegisterParams {
     data['email'] = this.email;
     data['password'] = this.password;
     data['name'] = this.name;
-    data['is_this_mobile_app'] = this.isThisMobileApp;
+    data['is_this_mobile_app'] = 1;
     return data;
   }
 }

@@ -1,16 +1,13 @@
 class RegisterResponse {
-  String? email;
-  String? password;
-  String? name;
-  int? isThisMobileApp;
+  bool? status;
+  String? message;
+  int? userId;
 
-  RegisterResponse(
-      {this.email, this.password, this.name, this.isThisMobileApp});
+  RegisterResponse({this.status, this.message, this.userId});
 
   RegisterResponse.fromJson(Map<String, dynamic> json) {
-    email = json['email'];
-    password = json['password'];
-    name = json['name'];
-    isThisMobileApp = json['is_this_mobile_app'];
+    status = json['status'];
+    message = json['message'];
+    userId = json['user_id'];
   }
 }

@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final BorderRadius borderRadius;
   final Function(String)? onSaved;
   final Function(String)? onChanged;
+
   const CustomTextField({
     super.key,
     this.title = "",
@@ -44,6 +45,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: widget.keyboardType,
         onChanged: widget.onChanged,
         onSaved: (value) {

@@ -1,11 +1,13 @@
 class LoginResponse {
   bool? status;
   String? message;
+  int? userId;
 
-  LoginResponse({this.status, this.message});
+  LoginResponse({this.status, this.message, this.userId});
 
-  LoginResponse.fromJson(Map<String, dynamic> json) {
+  LoginResponse.fromJson(json) {
     status = json['status'];
     message = json['message'];
+    userId = json['user_id'];
   }
 }

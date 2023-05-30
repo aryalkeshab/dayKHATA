@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  LoginController controller = Get.put(LoginController());
+  // LoginController controller = Get.put(LoginController());
   @override
   void initState() {
     // TODO: implement initState
@@ -57,13 +57,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         validator: (value) => Validator.validateEmail(value!),
                         onSaved: (value) {
-                          // loginParams.email = value;
-                        },
-                        onChanged: (value) {
                           loginParams.email = value;
                         },
+                        onChanged: (value) {
+                          // loginParams.email = value;
+                        },
                         keyboardType: TextInputType.emailAddress,
-                        controller: controller.emailController,
+                        // controller: controller.emailController,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
@@ -77,15 +77,16 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         keyboardType: TextInputType.visiblePassword,
                         isPasswordField: true,
-                        validator: (value) => Validator.validatePassword(value!),
+                        validator: (value) =>
+                            Validator.validatePassword(value!),
                         onSaved: (value) {
-                          // loginParams.password = value;
+                          loginParams.password = value;
                         },
                         onChanged: (value) {
-                          loginParams.password = value;
-                          print(value);
+                          // loginParams.password = value;
+                          // print(value);
                         },
-                        controller: controller.passwordController,
+                        // controller: controller.passwordController,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
@@ -99,10 +100,12 @@ class _LoginPageState extends State<LoginPage> {
                           if (currentState != null) {
                             currentState.save();
                             if (currentState.validate()) {
+                              print(loginParams.email);
+                              print(loginParams.password);
                               Get.find<LoginController>()
                                   .requestLogin(context, loginParams);
                             }
-                            controller.passwordController.clear();
+                            // controller.passwordController.clear();
                           }
                         },
                         width: MediaQuery.of(context).size.width * 0.9,
