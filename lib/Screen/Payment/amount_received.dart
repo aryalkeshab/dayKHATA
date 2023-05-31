@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screen/Drawer/drawer.dart';
 import 'package:my_app/Screen/Purchase/purchase.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: AmountReceived(),
-  ));
-}
+import '../../Core/resources/colors.dart';
+import '../../Core/utils/size_config.dart';
 
 class AmountReceived extends StatelessWidget {
   const AmountReceived({Key? key}) : super(key: key);
@@ -16,52 +13,43 @@ class AmountReceived extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        title: const Text('Amount Received'),
         backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
       ),
+      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 15, 10, 10),
-                    width: 35,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(49, 26, 187, 1),
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(9),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 0),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: primarycolor,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Icon(
+                        Icons.attach_money_outlined,
+                        color: whiteColor,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.attach_money_outlined,
-                      color: Colors.white,
+                    const SizedBox(
+                      width: 10,
                     ),
-                  ),
-                  const Text(
-                    'Amount Received',
-                    style: TextStyle(
-                      color: Color.fromRGBO(49, 26, 187, 1),
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                    ),
-                  )
-                ],
+                    Text(
+                      'Amount Received',
+                      style: TextStyle(
+                        color: primarycolor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
               ),
+              SizeConfig(context).verticalSpaceSmall(),
               SizedBox(
                 height: MediaQuery.of(context).size.height - 100,
                 child: Container(
