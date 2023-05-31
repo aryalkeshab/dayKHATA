@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Core/utils/constants.dart';
+import 'package:my_app/Core/utils/size_config.dart';
 import 'package:my_app/Screen/Drawer/drawer.dart';
-
+import 'dart:math' as math;
 import '../../Core/resources/colors.dart';
 
 class Overview extends StatefulWidget {
@@ -17,6 +17,7 @@ class _OverviewState extends State<Overview> {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
+        title: const Text('Dashboard'),
         backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
         // actions: const [
         //   Icon(
@@ -26,228 +27,469 @@ class _OverviewState extends State<Overview> {
         // ],
       ),
       drawer: const CustomDrawer(),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: primarycolor,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Icon(
+                        Icons.cloud_outlined,
+                        color: whiteColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Overview',
+                      style: TextStyle(
                         color: primarycolor,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: const Icon(
-                      Icons.cloud_outlined,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Overview',
-                    style: TextStyle(color: primarycolor),
-                  )
-                ],
-              ),
-              // Center(
-              // child: Container(
-              //   child: Row(children: [
-              //     Container(
-              //       margin: const EdgeInsets.fromLTRB(20, 20, 10, 18),
-              //       padding: const EdgeInsets.all(5),
-              //       decoration: BoxDecoration(
-              //         color: const Color.fromRGBO(49, 26, 187, 1),
-              //         shape: BoxShape.rectangle,
-              //         borderRadius: BorderRadius.circular(5),
-              //       ),
-              //       child: const Icon(
-              //         Icons.cloud_outlined,
-              //         color: Colors.white,
-              //       ),
-              //     ),
-              //     const Text(
-              //       'Overview',
-              //       style: TextStyle(
-              //           fontSize: 30,
-              //           fontWeight: FontWeight.bold,
-              //           fontFamily: 'Poppins',
-              //           color: Color.fromRGBO(46, 29, 187, 1)),
-              //     ),
-              //   ]),
-              // ),
-              // ),
-              const SizedBox(height: 2),
-              Container(
-                height: 140,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: const <BoxShadow>[],
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(15),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                SizeConfig(context).verticalSpaceMedium(),
+                ListView.builder(
+                  // padding: const EdgeInsets.symmetric(horizontal: 10),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 2,
+                  itemBuilder: (BuildContext context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Container(
+                        height: 140,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          boxShadow: const <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              offset: Offset(
+                                1,
+                                1,
+                              ),
+                            ),
+                          ],
+                          color: whiteColor,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Customers & Users',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w300,
+                                    fontFamily: 'Poppins',
+                                    color: primarycolor),
+                                textAlign: TextAlign.left,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '146,000',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w500,
+                                      color: primarycolor,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(15),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: primarycolor),
+                                      child: Icon(
+                                        Icons.qr_code,
+                                        color: whiteColor,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Since Last Week',
+                                    style: TextStyle(color: greyColor),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Transform.rotate(
+                                    angle: -45 *
+                                        math.pi /
+                                        180, // Rotate -45 degrees (counter-clockwise)
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      size: 24,
+                                      color: greenColor,
+                                    ),
+                                  ),
+                                  Text(
+                                    '12%',
+                                    style: TextStyle(color: greenColor),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                SizeConfig(context).verticalSpaceMedium(),
+                Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.all(12),
-                      child: const Text(
-                        'Customers & Users',
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontFamily: 'Poppins',
-                            color: Color.fromRGBO(49, 26, 187, 1)),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Container(
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(49, 26, 187, 1),
                         shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      margin: const EdgeInsets.symmetric(horizontal: 280),
-                      child: const IconButton(
-                        icon: Icon(
-                          Icons.qr_code_2,
-                          size: 42,
-                          color: Color.fromRGBO(49, 26, 187, 1),
-                        ),
-                        onPressed: null,
+                      child: const Icon(
+                        Icons.person_pin_outlined,
+                        color: Colors.white,
                       ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text(
+                      'Recent Activities',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(49, 26, 187, 1)),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                height: 140,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: const <BoxShadow>[],
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(12),
-                      child: const Text(
-                        'Customers & Users',
-                        style: TextStyle(
-                            fontSize: 23,
-                            fontFamily: 'Poppins',
-                            color: Color.fromRGBO(49, 26, 187, 1)),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(49, 26, 187, 1),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      margin: const EdgeInsets.symmetric(horizontal: 280),
-                      child: const IconButton(
-                        icon: Icon(
-                          Icons.qr_code_2,
-                          size: 42,
-                          color: Color.fromRGBO(49, 26, 187, 1),
-                        ),
-                        onPressed: null,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(children: [
+                SizeConfig(context).verticalSpaceMedium(),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 18),
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(49, 26, 187, 1),
+                    boxShadow: const <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 1,
+                        spreadRadius: 1,
+                        offset: Offset(
+                          1,
+                          1,
+                        ),
+                      ),
+                    ],
+                    color: whiteColor,
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Icon(
-                    Icons.person_pin_outlined,
-                    color: Colors.white,
-                  ),
-                ),
-                const Text(
-                  'Recent Activities',
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(49, 26, 187, 1)),
-                ),
-              ]),
-              Container(
-                width: 350,
-                height: 150,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(2),
-                  color: Colors.white,
-                ),
-                child: Container(
-                  margin: const EdgeInsets.all(12),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      Text(
-                        'Name',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(102, 0, 255, 1),
-                          fontSize: 16,
-                        ),
+                  child: Table(
+                    border: TableBorder.all(
+                      color: greyColor,
+                      style: BorderStyle.solid,
+                    ),
+                    children: [
+                      TableRow(
+                        children: [
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  'Name',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0,
+                                    color: primarycolor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  'Email',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0,
+                                    color: primarycolor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  'Joined',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0,
+                                    color: primarycolor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  'Type',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15.0,
+                                    color: primarycolor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Email',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(102, 0, 255, 1),
-                          fontSize: 16,
-                        ),
+                      const TableRow(
+                        children: [
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Javatpoint'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text('exaple@gmail.com'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('2022-04-05'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Service Provider'),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Joined',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(102, 0, 255, 1),
-                          fontSize: 16,
-                        ),
+                      const TableRow(
+                        children: [
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Javatpoint'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('exaple@gmail.com'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('2022-04-05'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Service Provider'),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Type',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(102, 0, 255, 1),
-                          fontSize: 16,
-                        ),
+                      const TableRow(
+                        children: [
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Javatpoint'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('exaple@gmail.com'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('2022-04-05'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Service Provider'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const TableRow(
+                        children: [
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Binayak Pokhrel'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('exaple@gmail.com'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('2022-04-05'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Service Provider'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const TableRow(
+                        children: [
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Javatpoint'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('exaple@gmail.com'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('2022-04-05'),
+                              ),
+                            ),
+                          ),
+                          TableCell(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text('Service Provider'),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   backgroundColor: Color.fromRGBO(49, 26, 187, 1),
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(icon: Icon(Icons.home)),
-      //   ],
-      // ),
     );
   }
 }
