@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/View/Journal/journal_voucher.dart';
+import 'package:my_app/Screen/Journal/journal_voucher.dart';
 
 void main() {
   runApp(const MaterialApp(

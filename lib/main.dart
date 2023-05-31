@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_app/View/Splash/splash.dart';
-import 'package:my_app/utils/app_pages.dart';
-import 'package:my_app/utils/scroll_behaviour.dart';
+import 'package:my_app/Core/utils/scroll_behaviour.dart';
+
+import 'Core/routes/app_pages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       scrollBehavior: CustomScrollBehaviour(),
-      home: const SplashScreen(),
+      initialRoute: Routes.splash,
     );
   }
 }
