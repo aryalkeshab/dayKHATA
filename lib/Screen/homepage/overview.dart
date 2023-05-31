@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Core/utils/constants.dart';
+import 'package:my_app/Screen/Drawer/drawer.dart';
+
+import '../../Core/resources/colors.dart';
 
 class Overview extends StatefulWidget {
   const Overview({Key? key}) : super(key: key);
@@ -21,37 +25,59 @@ class _OverviewState extends State<Overview> {
         //   ),
         // ],
       ),
+      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              Center(
-                child: SizedBox(
-                  child: Row(children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(20, 20, 10, 18),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(49, 26, 187, 1),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Icon(
-                        Icons.cloud_outlined,
-                        color: Colors.white,
-                      ),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: primarycolor,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Icon(
+                      Icons.cloud_outlined,
+                      color: Colors.white,
                     ),
-                    const Text(
-                      'Overview',
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
-                          color: Color.fromRGBO(46, 29, 187, 1)),
-                    ),
-                  ]),
-                ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Overview',
+                    style: TextStyle(color: primarycolor),
+                  )
+                ],
               ),
+              // Center(
+              // child: Container(
+              //   child: Row(children: [
+              //     Container(
+              //       margin: const EdgeInsets.fromLTRB(20, 20, 10, 18),
+              //       padding: const EdgeInsets.all(5),
+              //       decoration: BoxDecoration(
+              //         color: const Color.fromRGBO(49, 26, 187, 1),
+              //         shape: BoxShape.rectangle,
+              //         borderRadius: BorderRadius.circular(5),
+              //       ),
+              //       child: const Icon(
+              //         Icons.cloud_outlined,
+              //         color: Colors.white,
+              //       ),
+              //     ),
+              //     const Text(
+              //       'Overview',
+              //       style: TextStyle(
+              //           fontSize: 30,
+              //           fontWeight: FontWeight.bold,
+              //           fontFamily: 'Poppins',
+              //           color: Color.fromRGBO(46, 29, 187, 1)),
+              //     ),
+              //   ]),
+              // ),
+              // ),
               const SizedBox(height: 2),
               Container(
                 height: 140,

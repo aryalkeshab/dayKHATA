@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
-import '../../../Core/utils/constants.dart';
+import '../../../Core/utils/size_config.dart';
 import '../../../Core/widgets/buttons.dart';
 
 class Verificationpage extends StatefulWidget {
@@ -110,7 +111,7 @@ class _VerificationpageState extends State<Verificationpage> {
                 //         ),
                 //       ),
                 //     ]),
-                const SizedBox(height: 25),
+                SizeConfig(context).verticalSpaceMedium(),
                 Container(
                   height: 180,
                   width: 180,
@@ -125,7 +126,7 @@ class _VerificationpageState extends State<Verificationpage> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 25),
+                SizeConfig(context).verticalSpaceMedium(),
                 SizedBox(
                   // width: 320,
                   child: Text(
@@ -138,7 +139,7 @@ class _VerificationpageState extends State<Verificationpage> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizeConfig(context).verticalSpaceMedium(),
 
                 Pinput(
                   defaultPinTheme: defaultPinTheme,
@@ -170,7 +171,7 @@ class _VerificationpageState extends State<Verificationpage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizeConfig(context).verticalSpaceMedium(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: PrimaryButton(

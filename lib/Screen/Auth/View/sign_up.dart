@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Core/utils/custom_validators.dart';
 import 'package:my_app/Screen/Auth/Model/Request/register_params.dart';
+import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
-import '../../../Core/utils/constants.dart';
 import '../../../Core/utils/size_config.dart';
 import '../../../Core/widgets/buttons.dart';
 import '../../../Core/widgets/custom_text_field.dart';
@@ -50,6 +51,7 @@ class _SignupState extends State<Signup> {
                     leadingIcon: const Icon(
                       Icons.person,
                     ),
+                    validator: (value) => Validator.validateName(value!),
                     keyboardType: TextInputType.text,
                     onSaved: (value) {
                       registerParams.name = value;
@@ -59,43 +61,26 @@ class _SignupState extends State<Signup> {
                       // registerParams.name = value;
                     },
                   ),
-                  // SizedBox(
-                  //   height: MediaQuery.of(context).size.height * 0.02,
-                  // ),
-                  //  CustomTextField(
-                  //   // borderRadius: BorderRadius.circular(20),
-                  //   hint: "Last Name",
-                  //   leadingIcon: Icon(
-                  //     Icons.person,
-                  //   ),
-                  //   keyboardType: TextInputType.name,
-                  //   onSaved: (value){
-                  //     registerParams.
-                  //   },
-                  //   //  controller : _emailController
-                  // ),
-                  SizeConfig(context).verticalSpaceSmall(),
+
+                  SizeConfig(context).verticalSpaceMedium(),
                   // SizedBox(
                   //   height: MediaQuery.of(context).size.height * 0.02,
                   // ),
                   CustomTextField(
-                    hint: "Email Address",
+                    hint: "Email address",
                     leadingIcon: const Icon(
                       Icons.email,
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    // validator: ,
+                    validator: (value) => Validator.validateEmail(value!),
                     onSaved: (value) {
                       registerParams.email = value;
                     },
                     onChanged: (value) {
                       // registerParams.email = value;
                     },
-                    //  controller : _emailController
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
+                  SizeConfig(context).verticalSpaceMedium(),
                   CustomTextField(
                     hint: "New Password",
                     isPasswordField: true,
@@ -103,6 +88,7 @@ class _SignupState extends State<Signup> {
                       Icons.lock,
                     ),
                     keyboardType: TextInputType.visiblePassword,
+                    validator: (value) => Validator.validatePassword(value!),
                     onSaved: (value) {
                       registerParams.password = value;
                     },
@@ -111,9 +97,7 @@ class _SignupState extends State<Signup> {
                     },
                     //  controller : _emailController
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
+                  SizeConfig(context).verticalSpaceMedium(),
                   PrimaryButton(
                     label: "Sign Up",
                     onPressed: () {

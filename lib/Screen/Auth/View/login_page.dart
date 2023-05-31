@@ -3,8 +3,9 @@ import 'package:my_app/Core/utils/custom_validators.dart';
 import 'package:my_app/Screen/Auth/Controller/login_controller.dart';
 import 'package:my_app/Screen/Auth/View/forgotpassword.dart';
 import 'package:get/get.dart';
+import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
-import '../../../Core/utils/constants.dart';
+import '../../../Core/utils/size_config.dart';
 import '../../../Core/widgets/buttons.dart';
 import '../../../Core/widgets/custom_text_field.dart';
 import '../Model/Request/login_params.dart';
@@ -18,7 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  // LoginController controller = Get.put(LoginController());
+
   @override
   void initState() {
     // TODO: implement initState
@@ -46,12 +47,10 @@ class _LoginPageState extends State<LoginPage> {
                         width: MediaQuery.of(context).size.width * 0.6,
                         child: Image.asset('asset/images/dayimage.png'),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
-                      ),
+                      SizeConfig(context).verticalSpaceMedium(),
                       CustomTextField(
                         borderRadius: BorderRadius.circular(10),
-                        hint: " Enter Email",
+                        hint: " Email address",
                         leadingIcon: const Icon(
                           Icons.email,
                         ),
@@ -63,11 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                           // loginParams.email = value;
                         },
                         keyboardType: TextInputType.emailAddress,
-                        // controller: controller.emailController,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
+                      SizeConfig(context).verticalSpaceMedium(),
                       CustomTextField(
                         hint: "Password",
                         borderRadius: BorderRadius.circular(10),
@@ -86,11 +82,8 @@ class _LoginPageState extends State<LoginPage> {
                           // loginParams.password = value;
                           // print(value);
                         },
-                        // controller: controller.passwordController,
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
+                      SizeConfig(context).verticalSpaceMedium(),
                       PrimaryButton(
                         label: "Login",
                         onPressed: () {
@@ -100,12 +93,9 @@ class _LoginPageState extends State<LoginPage> {
                           if (currentState != null) {
                             currentState.save();
                             if (currentState.validate()) {
-                              print(loginParams.email);
-                              print(loginParams.password);
                               Get.find<LoginController>()
                                   .requestLogin(context, loginParams);
                             }
-                            // controller.passwordController.clear();
                           }
                         },
                         width: MediaQuery.of(context).size.width * 0.9,

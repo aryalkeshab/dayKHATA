@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Core/api/api_result.dart';
 import 'package:my_app/Core/api_request/api_request.dart';

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Screen/Auth/View/login_page.dart';
 
+import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
-import '../../../Core/utils/constants.dart';
+import '../../../Core/utils/size_config.dart';
 import '../../../Core/widgets/buttons.dart';
 import '../../../Core/widgets/custom_text_field.dart';
 
@@ -35,7 +36,7 @@ class Forgetpassword extends StatelessWidget {
                     child: const Icon(Icons.arrow_back),
                   ),
                 ),
-                const SizedBox(width: 18),
+                SizeConfig(context).verticalSpaceMedium(),
                 Text(
                   'Forgot Password',
                   style: TextStyle(
@@ -45,7 +46,7 @@ class Forgetpassword extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 25),
+            SizeConfig(context).verticalSpaceMedium(),
             Container(
               height: 180,
               width: 180,
@@ -61,7 +62,7 @@ class Forgetpassword extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Text(
                 'Please Enter Your Email Address To Receive a Verification Code.',
                 style: TextStyle(
@@ -72,18 +73,16 @@ class Forgetpassword extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomTextField(
+            SizeConfig(context).verticalSpaceMedium(),
+            const CustomTextField(
               hint: "Email address",
-              leadingIcon: const Icon(
+              leadingIcon: Icon(
                 Icons.email,
               ),
               keyboardType: TextInputType.emailAddress,
               //  controller : _emailController
             ),
-            const SizedBox(height: 15),
+            SizeConfig(context).verticalSpaceMedium(),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: PrimaryButton(

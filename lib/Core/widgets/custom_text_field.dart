@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Core/utils/custom_validators.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hint;

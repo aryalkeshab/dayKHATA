@@ -21,3 +21,7 @@
 // final grey400 = Colors.grey.withOpacity(0.4);
 // final grey500 = Colors.grey.withOpacity(0.5);
 // final darkGrey = Colors.black.withOpacity(0.6);
+
+import 'package:flutter/material.dart';
+
+Color primarycolor = const Color(0xFF311ABB);

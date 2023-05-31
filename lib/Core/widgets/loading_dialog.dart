@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
-import '../utils/constants.dart';
+import '../resources/colors.dart';
 
 class CustomLoadingDialog extends StatelessWidget {
   final double? width;

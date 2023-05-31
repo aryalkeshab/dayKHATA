@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
-import '../../../Core/utils/constants.dart';
+import '../../../Core/utils/size_config.dart';
 import '../../../Core/widgets/buttons.dart';
 import '../../../Core/widgets/custom_text_field.dart';
 import 'verificationpage.dart';
@@ -42,7 +43,7 @@ class Newpassword extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ]),
-            const SizedBox(height: 25),
+            SizeConfig(context).verticalSpaceMedium(),
             Container(
               height: 180,
               width: 180,
@@ -70,26 +71,26 @@ class Newpassword extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            CustomTextField(
+            const CustomTextField(
               hint: "New Password",
               isPasswordField: true,
-              leadingIcon: const Icon(
+              leadingIcon: Icon(
                 Icons.lock,
               ),
               keyboardType: TextInputType.visiblePassword,
               //  controller : _emailController
             ),
-            const SizedBox(height: 15),
-            CustomTextField(
+            SizeConfig(context).verticalSpaceMedium(),
+            const CustomTextField(
               hint: "Confirm Password",
               isPasswordField: true,
-              leadingIcon: const Icon(
+              leadingIcon: Icon(
                 Icons.lock,
               ),
               keyboardType: TextInputType.visiblePassword,
               //  controller : _emailController
             ),
-            const SizedBox(height: 15),
+            SizeConfig(context).verticalSpaceMedium(),
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: PrimaryButton(
