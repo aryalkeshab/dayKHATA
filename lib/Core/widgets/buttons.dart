@@ -124,3 +124,47 @@ class PrimaryOutlineButton extends StatelessWidget {
     );
   }
 }
+
+class CustomIconButton extends StatelessWidget {
+  final VoidCallback ontap;
+  final String name;
+  final IconData icon;
+  final double? buttonwidth;
+  const CustomIconButton(
+      {required this.name,
+      required this.ontap,
+      required this.icon,
+      this.buttonwidth,
+      Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        // alignment: Alignment.center,
+        height: 45,
+        width: buttonwidth ?? 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(22),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              name,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Icon(
+              icon,
+              size: 22,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

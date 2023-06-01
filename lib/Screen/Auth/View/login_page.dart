@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         width: MediaQuery.of(context).size.width * 0.9,
-                        color: const Color.fromRGBO(49, 26, 187, 1),
+                        color: primarycolor,
                         icon: const Icon(Icons.refresh_sharp),
                       ),
                       const SizedBox(height: 12),
