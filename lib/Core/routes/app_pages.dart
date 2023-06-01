@@ -42,7 +42,7 @@ class AppPages {
       page: Newpassword.new,
     ),
     GetPage(
-      name: _Paths.overview,
+      name: _Paths.dashboard,
       page: Overview.new,
     ),
     GetPage(

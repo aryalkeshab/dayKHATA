@@ -48,7 +48,7 @@ class LoginController extends GetxController {
   }
 
   void authorize() {
-    Get.offAllNamed(Routes.overview);
+    Get.offAllNamed(Routes.dashboard);
   }
   // void logout() async {
   //   await secureStorage.deleteAll();

@@ -10,7 +10,7 @@ abstract class Routes {
   static const signup = _Paths.signup;
   static const verify = _Paths.verify;
   static const setnewpassword = _Paths.setnewpassword;
-  static const overview = _Paths.overview;
+  static const dashboard = _Paths.dashboard;
   static const amountReceived = _Paths.amountReceived;
   static const purchaseCash = _Paths.purchaseCash;
   static const purchaseCredit = _Paths.purchaseCredit;
@@ -25,7 +25,7 @@ abstract class _Paths {
   static const login = '/login';
   static const verify = '/verify';
   static const setnewpassword = '/setnewpassword';
-  static const overview = '/overview';
+  static const dashboard = '/dashboard';
   static const amountReceived = '/amountReceived';
   static const purchaseCash = '/purchaseCash';
   static const purchaseCredit = '/purchaseCredit';

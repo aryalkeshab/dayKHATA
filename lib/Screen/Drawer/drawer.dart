@@ -42,12 +42,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
               title: const Text('Dashboard'),
               onTap: () {
                 Navigator.pop(context);
+                Get.toNamed(Routes.dashboard);
               },
             ),
             ExpansionTile(
               title: const Text('Receive'),
               leading: const Icon(Icons.window),
-              childrenPadding: const EdgeInsets.only(left: 30),
+              childrenPadding: const EdgeInsets.only(left: 55),
               children: [
                 ListTile(
                   title: const Text('Cash'),
@@ -81,7 +82,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ExpansionTile(
               title: const Text('Payment'),
               leading: const Icon(Icons.window),
-              childrenPadding: const EdgeInsets.only(left: 60),
+              childrenPadding: const EdgeInsets.only(left: 55),
               children: [
                 ListTile(
                   title: const Text('Cash'),
@@ -97,27 +98,27 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
               ],
             ),
-            // ExpansionTile(
-            //   title: const Text('Sales and Income'),
-            //   leading: const Icon(Icons.window),
-            //   childrenPadding: const EdgeInsets.only(left: 60),
-            //   children: [
-            //     ListTile(
-            //       title: const Text('Cash Sales'),
-            //       onTap: () {},
-            //       // leading: const Icon(Icons.widgets),
-            //     ),
-            //     ListTile(
-            //       title: const Text('Bank Sales'),
-            //       onTap: () {},
-            //       // leading: const Icon(Icons.widgets),
-            //     ),
-            //   ],
-            // ),
+            ExpansionTile(
+              title: const Text('Sales and Income'),
+              leading: const Icon(Icons.window),
+              childrenPadding: const EdgeInsets.only(left: 55),
+              children: [
+                ListTile(
+                  title: const Text('Cash Sales'),
+                  onTap: () {},
+                  // leading: const Icon(Icons.widgets),
+                ),
+                ListTile(
+                  title: const Text('Bank Sales'),
+                  onTap: () {},
+                  // leading: const Icon(Icons.widgets),
+                ),
+              ],
+            ),
             ExpansionTile(
               title: const Text('Purchase/Expenses'),
               leading: const Icon(Icons.window),
-              childrenPadding: const EdgeInsets.only(left: 60),
+              childrenPadding: const EdgeInsets.only(left: 55),
               children: [
                 ListTile(
                   title: const Text('Cash Purchase'),
@@ -142,7 +143,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ExpansionTile(
               title: const Text('Bank'),
               leading: const Icon(Icons.window),
-              childrenPadding: const EdgeInsets.only(left: 60),
+              childrenPadding: const EdgeInsets.only(left: 55),
               children: [
                 ListTile(
                   title: const Text('Withdrawal'),
@@ -158,7 +159,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ),
             ListTile(
               leading: const Icon(
-                Icons.window_outlined,
+                Icons.window,
               ),
               title: const Text('Journal Voucher'),
               onTap: () {
@@ -166,75 +167,36 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 Get.toNamed(Routes.journalVoucher);
               },
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.window_outlined,
-              ),
-              title: const Text('Profit/Loss'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.window_outlined,
-              ),
-              title: const Text('Balance Sheet'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.window_outlined,
-              ),
-              title: const Text('Trail Balance'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
             ExpansionTile(
               title: const Text('Account Report'),
               leading: const Icon(Icons.settings_outlined),
-              childrenPadding: const EdgeInsets.only(left: 60),
+              childrenPadding: const EdgeInsets.only(left: 55),
               children: [
                 ListTile(
-                  // title: const Text('Withdrawal'),
-                  onTap: () {},
-                  // leading: const Icon(Icons.widgets),
+                  title: const Text('Profit/Loss'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 ListTile(
-                  // title: const Text('Deposit'),
-                  onTap: () {},
-                  // leading: const Icon(Icons.widgets),
+                  title: const Text('Balance Sheet'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: const Text('Trail Balance'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: const Text('Day Book'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
-            ),
-            ExpansionTile(
-              title: const Text('Day Book'),
-              leading: const Icon(Icons.settings_outlined),
-              childrenPadding: const EdgeInsets.only(left: 60),
-              children: [
-                ListTile(
-                  // title: const Text('Withdrawal'),
-                  onTap: () {},
-                  // leading: const Icon(Icons.widgets),
-                ),
-                ListTile(
-                  // title: const Text('Deposit'),
-                  onTap: () {},
-                  // leading: const Icon(Icons.widgets),
-                ),
-              ],
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.window_outlined,
-              ),
-              title: const Text('Trail Balance'),
-              onTap: () {
-                Navigator.pop(context);
-              },
             ),
             ListTile(
               leading: const Icon(
