@@ -225,59 +225,58 @@ class _AmountReceivedState extends State<AmountReceived> {
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         CustomContainer(
-                          padding: const EdgeInsets.all(5),
+                          padding: EdgeInsets.all(5),
                           child: Row(
                             children: [
                               ElevatedButton(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.vertical(
-                                              top: Radius.circular(18))),
-                                      builder: (context) {
-                                        return Wrap(
-                                          children: [
-                                            ListTile(
-                                              onTap: () {},
-                                              leading: Container(
-                                                decoration: BoxDecoration(
-                                                    color: primarycolor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                child: Icon(
-                                                  Icons.camera_alt_outlined,
-                                                  color: whiteColor,
-                                                ),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(18))),
+                                    builder: (context) {
+                                      return Wrap(
+                                        children: [
+                                          ListTile(
+                                            onTap: () {},
+                                            leading: Container(
+                                              decoration: BoxDecoration(
+                                                  color: primarycolor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              padding: const EdgeInsets.all(5),
+                                              child: Icon(
+                                                Icons.camera_alt_outlined,
+                                                color: whiteColor,
                                               ),
-                                              title: const Text('Camera'),
                                             ),
-                                            ListTile(
-                                              onTap: () {},
-                                              leading: Container(
-                                                decoration: BoxDecoration(
-                                                    color: primarycolor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50)),
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                child: Icon(
-                                                  Icons.photo_library_outlined,
-                                                  color: whiteColor,
-                                                ),
+                                            title: const Text('Camera'),
+                                          ),
+                                          ListTile(
+                                            onTap: () {},
+                                            leading: Container(
+                                              decoration: BoxDecoration(
+                                                  color: primarycolor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              padding: const EdgeInsets.all(5),
+                                              child: Icon(
+                                                Icons.photo_library_outlined,
+                                                color: whiteColor,
                                               ),
-                                              title: const Text('Gallery'),
                                             ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: Text('Browse')),
+                                            title: const Text('Gallery'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: const Text('Browse'),
+                              ),
                               const SizedBox(
                                 width: 10,
                               ),

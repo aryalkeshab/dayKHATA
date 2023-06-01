@@ -132,6 +132,7 @@ class _JournalVoucherScreenState extends State<JournalVoucherScreen> {
                             ],
                           ),
                         ),
+                        SizeConfig(context).verticalSpaceSmall(),
                         const CustomContainer(
                           text: 'Voucher Date:',
                         ),
@@ -241,7 +242,7 @@ class _JournalVoucherScreenState extends State<JournalVoucherScreen> {
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         const CustomContainer(
-                          text: 'Total Amount: ',
+                          text: 'Amount: ',
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         CustomContainer(
@@ -258,7 +259,7 @@ class _JournalVoucherScreenState extends State<JournalVoucherScreen> {
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 5),
-                              hintText: 'Enter Total Amount',
+                              hintText: 'Enter Amount',
 
                               // label: Text(title),
                             ),
