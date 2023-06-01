@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Core/widgets/buttons.dart';
 import 'package:my_app/Screen/Drawer/drawer.dart';
-import 'package:my_app/Screen/Purchase/purchase.dart';
-
 import '../../Core/resources/colors.dart';
+import 'package:intl/intl.dart';
+
 import '../../Core/utils/size_config.dart';
 
-class AmountReceived extends StatelessWidget {
-  const AmountReceived({Key? key}) : super(key: key);
+class AmountReceived extends StatefulWidget {
+  AmountReceived({Key? key}) : super(key: key);
+
+  @override
+  State<AmountReceived> createState() => _AmountReceivedState();
+}
+
+class _AmountReceivedState extends State<AmountReceived> {
+  TextEditingController dateController = TextEditingController();
+  TextEditingController playrNameController = TextEditingController();
+
+  final dropdownItems = ['Cash', 'Bank'];
+  String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +78,9 @@ class AmountReceived extends StatelessWidget {
                     shape: BoxShape.rectangle,
                   ),
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                    height: 500,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 25),
+                    // height: 500,
                     // height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -83,18 +95,40 @@ class AmountReceived extends StatelessWidget {
                           children: [
                             Expanded(
                               child: CustomContainer(
+                                padding: const EdgeInsets.all(5),
                                 child: TextFormField(
-                                  cursorColor: Colors.black,
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    focusedBorder: OutlineInputBorder(),
-                                    enabledBorder: OutlineInputBorder(),
-                                    contentPadding: EdgeInsets.symmetric(
-                                      vertical: 8,
-                                      horizontal: 5,
-                                    ),
-                                    hintText: 'mm/dd/yyyy',
-                                  ),
+                                  onTap: () async {
+                                    DateTime? pickeddate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2101));
+
+                                    if (pickeddate != null) {
+                                      setState(() {
+                                        dateController.text =
+                                            DateFormat('yyy-MM-dd')
+                                                .format(pickeddate);
+                                      });
+                                    }
+                                  },
+                                  controller: dateController,
+                                  cursorColor: primarycolor,
+                                  decoration: InputDecoration(
+                                      // icon: Icon(Icons.calendar_month),
+                                      border: const OutlineInputBorder(),
+                                      focusedBorder: const OutlineInputBorder(),
+                                      enabledBorder: const OutlineInputBorder(),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                        vertical: 8,
+                                        horizontal: 5,
+                                      ),
+                                      hintText: 'mm-dd-yyyy',
+                                      suffixIcon: Icon(
+                                        Icons.calendar_month,
+                                        color: greyColor,
+                                      )),
                                 ),
                               ),
                             ),
@@ -107,6 +141,7 @@ class AmountReceived extends StatelessWidget {
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         CustomContainer(
+                          padding: const EdgeInsets.all(5),
                           child: TextFormField(
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -124,306 +159,111 @@ class AmountReceived extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        const CustomContainer(
+                          text: 'Cash Or Bank:',
+                        ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        CustomContainer(
+                          padding: const EdgeInsets.all(5),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                style: BorderStyle.solid,
+                                width: 1,
+                                color: Colors.black,
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                  items:
+                                      dropdownItems.map(buildMenuItem).toList(),
+                                  value: value,
+                                  isExpanded: true,
+                                  onChanged: (value) => setState(() {
+                                        this.value = value;
+                                      })),
+                            ),
+                          ),
+                        ),
+
+                        //  TextFormField(
+                        //   cursorColor: Colors.black,
+                        //   decoration: InputDecoration(
+                        //     border: const OutlineInputBorder(),
+                        //     focusedBorder: const OutlineInputBorder(),
+                        //     enabledBorder: OutlineInputBorder(
+                        //       // borderSide: BorderSide.none,
+                        //       borderRadius: BorderRadius.circular(5),
+                        //     ),
+                        //     contentPadding: const EdgeInsets.symmetric(
+                        //         vertical: 8, horizontal: 5),
+                        //     hintText: 'Cash/Bank but dropdown',
+
+                        //     // label: Text(title),
+                        //   ),
+                        // ),
+
+                        SizeConfig(context).verticalSpaceSmall(),
+                        const CustomContainer(
+                          text: 'Total Amount: ',
+                        ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        CustomContainer(
+                          padding: const EdgeInsets.all(5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              focusedBorder: const OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                // borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 5),
+                              hintText: 'Enter Total AMount',
+
+                              // label: Text(title),
+                            ),
+                          ),
+                        ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        const CustomContainer(
+                          text: 'Receipt: ',
+                        ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        CustomContainer(
+                          padding: const EdgeInsets.all(5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              focusedBorder: const OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                // borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 5),
+                              hintText: ' camera or gallery with bottom sheet',
+
+                              // label: Text(title),
+                            ),
+                          ),
+                        ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        PrimaryButton(
+                          label: 'Submit',
+                          onPressed: () {},
+                        )
                       ],
                     ),
                   ),
-                  // child: Container(
-                  //   child: Column(children: [
-                  //     Container(
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: const Text(
-                  //         'Date :',
-                  //         style: TextStyle(
-                  //           fontSize: 13,
-                  //           fontWeight: FontWeight.bold,
-                  //           fontFamily: 'Poppins',
-                  //           color: Color.fromRGBO(102, 0, 255, 1),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 50,
-                  //       width: 345,
-                  //       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                  //       margin: const EdgeInsets.fromLTRB(3, 4, 1, 4),
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: Row(
-                  //         children: [
-                  //           Expanded(
-                  //             child: TextFormField(
-                  //               decoration: const InputDecoration(
-                  //                 contentPadding: EdgeInsets.all(6),
-                  //                 fillColor: Colors.grey,
-                  //                 border: OutlineInputBorder(
-                  //                   borderRadius: BorderRadius.all(Radius.zero),
-                  //                 ),
-                  //                 hintText: 'mm / dd / yyyy',
-                  //                 hintStyle: TextStyle(
-                  //                   fontFamily: 'Poppins',
-                  //                   fontSize: 12,
-                  //                   fontWeight: FontWeight.bold,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           IconButton(
-                  //             onPressed: () {},
-                  //             icon: const Icon(Icons.calendar_month),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       margin: const EdgeInsets.all(6),
-                  //       padding: const EdgeInsets.all(12),
-                  //       width: 345,
-                  //       height: 46,
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: const Text(
-                  //         'Payer Name :',
-                  //         style: TextStyle(
-                  //           fontSize: 13,
-                  //           fontWeight: FontWeight.bold,
-                  //           fontFamily: 'Poppins',
-                  //           color: Color.fromRGBO(102, 0, 255, 1),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 50,
-                  //       width: 345,
-                  //       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                  //       margin: const EdgeInsets.all(2),
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: TextFormField(
-                  //         decoration: const InputDecoration(
-                  //             contentPadding: EdgeInsets.all(6),
-                  //             fillColor: Colors.grey,
-                  //             border: OutlineInputBorder(
-                  //                 borderRadius: BorderRadius.all(Radius.zero)),
-                  //             hintText: 'Enter Name of Payer',
-                  //             hintStyle: TextStyle(
-                  //               fontFamily: 'Poppins',
-                  //               fontSize: 12,
-                  //               fontWeight: FontWeight.bold,
-                  //             )),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       margin: const EdgeInsets.all(6),
-                  //       padding: const EdgeInsets.all(12),
-                  //       width: 345,
-                  //       height: 46,
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: const Text(
-                  //         'Cash or Bank :',
-                  //         style: TextStyle(
-                  //           fontSize: 13,
-                  //           fontWeight: FontWeight.bold,
-                  //           fontFamily: 'Poppins',
-                  //           color: Color.fromRGBO(102, 0, 255, 1),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 50,
-                  //       width: 345,
-                  //       padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
-                  //       margin: const EdgeInsets.all(2),
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: Container(
-                  //         padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
-                  //         margin: const EdgeInsets.all(2),
-                  //         decoration: BoxDecoration(
-                  //           border: Border.all(
-                  //             color: Colors.grey,
-                  //           ),
-                  //         ),
-                  //         child: Row(
-                  //           children: [
-                  //             SizedBox(
-                  //               width: 305,
-                  //               child: DropdownButtonHideUnderline(
-                  //                 child: DropdownButton(
-                  //                   items: const [
-                  //                     DropdownMenuItem(
-                  //                       value: 'Cash',
-                  //                       child: Text('Cash'),
-                  //                     ),
-                  //                     DropdownMenuItem(
-                  //                       value: 'Cash',
-                  //                       child: Text('Bank'),
-                  //                     )
-                  //                   ],
-                  //                   onChanged: (String? value) {},
-                  //                   hint: const Text(
-                  //                     'Cash / Bank',
-                  //                     style: TextStyle(
-                  //                       fontFamily: 'Poppins',
-                  //                       fontSize: 13,
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       margin: const EdgeInsets.all(6),
-                  //       padding: const EdgeInsets.all(12),
-                  //       width: 345,
-                  //       height: 46,
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: const Text(
-                  //         'Total Amount :',
-                  //         style: TextStyle(
-                  //           fontSize: 13,
-                  //           fontWeight: FontWeight.bold,
-                  //           fontFamily: 'Poppins',
-                  //           color: Color.fromRGBO(102, 0, 255, 1),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 50,
-                  //       width: 345,
-                  //       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                  //       margin: const EdgeInsets.all(2),
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: TextFormField(
-                  //         decoration: const InputDecoration(
-                  //             fillColor: Colors.grey,
-                  //             contentPadding: EdgeInsets.all(6),
-                  //             border: OutlineInputBorder(
-                  //                 borderRadius: BorderRadius.all(Radius.zero)),
-                  //             hintText: 'Enter Total Amount',
-                  //             hintStyle: TextStyle(
-                  //               fontFamily: 'Poppins',
-                  //               fontSize: 12,
-                  //               fontWeight: FontWeight.bold,
-                  //             )),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       margin: const EdgeInsets.all(6),
-                  //       padding: const EdgeInsets.all(12),
-                  //       width: 345,
-                  //       height: 46,
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: const Text(
-                  //         'Receipt :',
-                  //         style: TextStyle(
-                  //           fontSize: 13,
-                  //           fontWeight: FontWeight.bold,
-                  //           fontFamily: 'Poppins',
-                  //           color: Color.fromRGBO(102, 0, 255, 1),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       height: 50,
-                  //       width: 345,
-                  //       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                  //       margin: const EdgeInsets.all(2),
-                  //       decoration: BoxDecoration(
-                  //         border: Border.all(
-                  //           style: BorderStyle.solid,
-                  //           color: const Color.fromARGB(255, 195, 195, 195),
-                  //         ),
-                  //       ),
-                  //       child: Row(
-                  //         children: [
-                  //           ElevatedButton(
-                  //             onPressed: () {},
-                  //             style: ElevatedButton.styleFrom(
-                  //                 backgroundColor: Colors.grey.shade300),
-                  //             child: const Text(
-                  //               'Browse..',
-                  //               style: TextStyle(
-                  //                 color: Colors.black,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           const SizedBox(width: 6),
-                  //           const Text('No Files Selected.')
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.end,
-                  //       children: [
-                  //         ElevatedButton(
-                  //             onPressed: () {
-                  //               Navigator.of(context).push(
-                  //                 MaterialPageRoute(
-                  //                     builder: (BuildContext context) {
-                  //                   return const Purchase();
-                  //                 }),
-                  //               );
-                  //             },
-                  //             style: ElevatedButton.styleFrom(
-                  //               backgroundColor:
-                  //                   const Color.fromRGBO(49, 26, 187, 1),
-                  //             ),
-                  //             child: const Text(
-                  //               'Submit',
-                  //               style: TextStyle(
-                  //                 color: Colors.white,
-                  //                 fontSize: 13,
-                  //                 fontWeight: FontWeight.bold,
-                  //               ),
-                  //             )),
-                  //       ],
-                  //     )
-                  //   ]),
-                  // ),
                 ),
               ],
             ),
@@ -432,6 +272,13 @@ class AmountReceived extends StatelessWidget {
       ),
     );
   }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+      value: item,
+      child: Text(
+        item,
+        style: const TextStyle(),
+      ));
 }
 
 class CustomContainer extends StatelessWidget {
@@ -445,7 +292,7 @@ class CustomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? const EdgeInsets.all(5),
+      padding: padding ?? const EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         border: Border.all(
