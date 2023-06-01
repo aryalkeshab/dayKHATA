@@ -233,6 +233,30 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                             ),
                           ),
                         ),
+                        const CustomContainer(
+                          text: 'VAT: ',
+                        ),
+                        SizeConfig(context).verticalSpaceSmall(),
+                        CustomContainer(
+                          padding: const EdgeInsets.all(5),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              focusedBorder: const OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                // borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 5),
+                              hintText: 'Enter VAT Amount',
+
+                              // label: Text(title),
+                            ),
+                          ),
+                        ),
                         SizeConfig(context).verticalSpaceSmall(),
                         PrimaryButton(
                           width: MediaQuery.of(context).size.width,

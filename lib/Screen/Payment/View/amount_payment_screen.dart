@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:my_app/Core/widgets/buttons.dart';
-import 'package:my_app/Screen/Drawer/drawer.dart';
+import 'package:my_app/save_export.dart';
+
 import '../../../Core/resources/colors.dart';
+import '../../../Core/utils/size_config.dart';
+import '../../../Core/widgets/buttons.dart';
+import '../../Drawer/drawer.dart';
+import 'amount_received.dart';
 import 'package:intl/intl.dart';
 
-import '../../../Core/utils/size_config.dart';
-
-class AmountReceived extends StatefulWidget {
-  AmountReceived({Key? key}) : super(key: key);
+class AmountPaymentScreen extends StatefulWidget {
+  const AmountPaymentScreen({Key? key}) : super(key: key);
 
   @override
-  State<AmountReceived> createState() => _AmountReceivedState();
+  State<AmountPaymentScreen> createState() => _AmountPaymentScreenState();
 }
 
-class _AmountReceivedState extends State<AmountReceived> {
+class _AmountPaymentScreenState extends State<AmountPaymentScreen> {
   TextEditingController dateController = TextEditingController();
-  TextEditingController playrNameController = TextEditingController();
 
   final dropdownItems = ['Cash', 'Bank'];
   String? value;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: const Text('Amount Received'),
+        title: const Text('Amount Payment'),
         backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
       ),
       drawer: const CustomDrawer(),
@@ -52,7 +51,7 @@ class _AmountReceivedState extends State<AmountReceived> {
                       width: 10,
                     ),
                     Text(
-                      'Amount Received',
+                      'Amount Payment',
                       style: TextStyle(
                         color: primarycolor,
                         fontSize: 20,
@@ -213,7 +212,7 @@ class _AmountReceivedState extends State<AmountReceived> {
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 5),
-                              hintText: 'Enter Total AMount',
+                              hintText: 'Enter Total Amount',
 
                               // label: Text(title),
                             ),
@@ -303,47 +302,11 @@ class _AmountReceivedState extends State<AmountReceived> {
       ),
     );
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-      value: item,
-      child: Text(
-        item,
-        style: const TextStyle(),
-      ));
 }
 
-class CustomContainer extends StatelessWidget {
-  final String? text;
-  final Widget? child;
-  final EdgeInsetsGeometry? padding;
-
-  const CustomContainer({Key? key, this.text, this.child, this.padding})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: padding ?? const EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        border: Border.all(
-          style: BorderStyle.solid,
-          width: 1,
-          color: const Color.fromARGB(255, 195, 195, 195),
-        ),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: child ??
-          (text != null
-              ? Text(
-                  text!,
-                  style: TextStyle(
-                    color: primarycolor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              : const SizedBox()),
-    );
-  }
-}
+DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+    value: item,
+    child: Text(
+      item,
+      style: const TextStyle(),
+    ));
