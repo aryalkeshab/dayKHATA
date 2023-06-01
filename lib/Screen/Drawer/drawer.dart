@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_app/Core/routes/app_pages.dart';
 
-import '../Payment/amount_received.dart';
+import '../Payment/View/amount_received.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -49,13 +51,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ListTile(
                   title: const Text('Cash'),
                   onTap: () {
-                    // Get.toNamed()  AmountReceived
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AmountReceived(),
-                      ),
-                    );
+                    Get.toNamed(Routes.amountReceived);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => AmountReceived(),
+                    //   ),
+                    // );
                   },
                   // leading: const Icon(Icons.widgets),
                 ),
@@ -116,7 +118,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
               children: [
                 ListTile(
                   title: const Text('Cash Purchase'),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.purchaseCash);
+                  },
                   // leading: const Icon(Icons.widgets),
                 ),
                 ListTile(

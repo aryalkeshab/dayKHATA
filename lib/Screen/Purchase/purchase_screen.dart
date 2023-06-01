@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Core/widgets/buttons.dart';
-import 'package:my_app/Screen/Drawer/drawer.dart';
-import '../../Core/resources/colors.dart';
 import 'package:intl/intl.dart';
 
+import '../../Core/resources/colors.dart';
 import '../../Core/utils/size_config.dart';
+import '../../Core/widgets/buttons.dart';
+import '../Drawer/drawer.dart';
+import '../Payment/View/amount_received.dart';
 
-class AmountReceived extends StatefulWidget {
-  AmountReceived({Key? key}) : super(key: key);
+class PurchaseScreen extends StatefulWidget {
+  const PurchaseScreen({Key? key}) : super(key: key);
 
   @override
-  State<AmountReceived> createState() => _AmountReceivedState();
+  State<PurchaseScreen> createState() => _PurchaseScreenState();
 }
 
-class _AmountReceivedState extends State<AmountReceived> {
+class _PurchaseScreenState extends State<PurchaseScreen> {
   TextEditingController dateController = TextEditingController();
-  TextEditingController playrNameController = TextEditingController();
-
-  final dropdownItems = ['Cash', 'Bank'];
-  String? value;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: const Text('Amount Received'),
+        title: const Text('Purchase(Cash)'),
         backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
       ),
       drawer: const CustomDrawer(),
@@ -51,7 +48,7 @@ class _AmountReceivedState extends State<AmountReceived> {
                       width: 10,
                     ),
                     Text(
-                      'Amount Received',
+                      'Purchase (Cash)',
                       style: TextStyle(
                         color: primarycolor,
                         fontSize: 20,
@@ -80,7 +77,6 @@ class _AmountReceivedState extends State<AmountReceived> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 25),
-                    // height: 500,
                     // height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -105,6 +101,9 @@ class _AmountReceivedState extends State<AmountReceived> {
                                         lastDate: DateTime(2101));
 
                                     if (pickeddate != null) {
+                                      dateController.text =
+                                          DateFormat('yyy-MM-dd')
+                                              .format(pickeddate);
                                       setState(() {
                                         dateController.text =
                                             DateFormat('yyy-MM-dd')
@@ -115,20 +114,21 @@ class _AmountReceivedState extends State<AmountReceived> {
                                   controller: dateController,
                                   cursorColor: primarycolor,
                                   decoration: InputDecoration(
-                                      // icon: Icon(Icons.calendar_month),
-                                      border: const OutlineInputBorder(),
-                                      focusedBorder: const OutlineInputBorder(),
-                                      enabledBorder: const OutlineInputBorder(),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                        vertical: 8,
-                                        horizontal: 5,
-                                      ),
-                                      hintText: 'mm-dd-yyyy',
-                                      suffixIcon: Icon(
-                                        Icons.calendar_month,
-                                        color: greyColor,
-                                      )),
+                                    // icon: Icon(Icons.calendar_month),
+                                    border: const OutlineInputBorder(),
+                                    focusedBorder: const OutlineInputBorder(),
+                                    enabledBorder: const OutlineInputBorder(),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 8,
+                                      horizontal: 5,
+                                    ),
+                                    hintText: 'mm-dd-yyyy',
+                                    suffixIcon: Icon(
+                                      Icons.calendar_month,
+                                      color: greyColor,
+                                    ),
+                                  ),
+                                  // onChanged: () {},
                                 ),
                               ),
                             ),
@@ -161,54 +161,31 @@ class _AmountReceivedState extends State<AmountReceived> {
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         const CustomContainer(
-                          text: 'Cash Or Bank:',
+                          text: 'Particulars :',
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         CustomContainer(
                           padding: const EdgeInsets.all(5),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                style: BorderStyle.solid,
-                                width: 1,
-                                color: Colors.black,
+                          child: TextFormField(
+                            cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              focusedBorder: const OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                // borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(5),
                               ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                  items:
-                                      dropdownItems.map(buildMenuItem).toList(),
-                                  value: value,
-                                  isExpanded: true,
-                                  onChanged: (value) => setState(() {
-                                        this.value = value;
-                                      })),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 5),
+                              hintText: 'Particulars',
+
+                              // label: Text(title),
                             ),
                           ),
                         ),
-
-                        //  TextFormField(
-                        //   cursorColor: Colors.black,
-                        //   decoration: InputDecoration(
-                        //     border: const OutlineInputBorder(),
-                        //     focusedBorder: const OutlineInputBorder(),
-                        //     enabledBorder: OutlineInputBorder(
-                        //       // borderSide: BorderSide.none,
-                        //       borderRadius: BorderRadius.circular(5),
-                        //     ),
-                        //     contentPadding: const EdgeInsets.symmetric(
-                        //         vertical: 8, horizontal: 5),
-                        //     hintText: 'Cash/Bank but dropdown',
-
-                        //     // label: Text(title),
-                        //   ),
-                        // ),
-
                         SizeConfig(context).verticalSpaceSmall(),
                         const CustomContainer(
-                          text: 'Total Amount: ',
+                          text: 'Amount: ',
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         CustomContainer(
@@ -233,7 +210,7 @@ class _AmountReceivedState extends State<AmountReceived> {
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         const CustomContainer(
-                          text: 'Receipt: ',
+                          text: 'Taxable: ',
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         CustomContainer(
@@ -250,7 +227,7 @@ class _AmountReceivedState extends State<AmountReceived> {
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 5),
-                              hintText: ' camera or gallery with bottom sheet',
+                              hintText: 'Enter Taxable Amount',
 
                               // label: Text(title),
                             ),
@@ -258,7 +235,9 @@ class _AmountReceivedState extends State<AmountReceived> {
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
                         PrimaryButton(
+                          width: MediaQuery.of(context).size.width,
                           label: 'Submit',
+                          color: primarycolor,
                           onPressed: () {},
                         )
                       ],
@@ -270,49 +249,6 @@ class _AmountReceivedState extends State<AmountReceived> {
           ),
         ),
       ),
-    );
-  }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-      value: item,
-      child: Text(
-        item,
-        style: const TextStyle(),
-      ));
-}
-
-class CustomContainer extends StatelessWidget {
-  final String? text;
-  final Widget? child;
-  final EdgeInsetsGeometry? padding;
-
-  const CustomContainer({Key? key, this.text, this.child, this.padding})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: padding ?? const EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        border: Border.all(
-          style: BorderStyle.solid,
-          width: 2,
-          color: const Color.fromARGB(255, 195, 195, 195),
-        ),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: child ??
-          (text != null
-              ? Text(
-                  text!,
-                  style: TextStyle(
-                    color: primarycolor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              : const SizedBox()),
     );
   }
 }

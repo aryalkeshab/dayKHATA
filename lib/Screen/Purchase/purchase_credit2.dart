@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Screen/Payment/amount_payment.dart';
+import 'package:my_app/Screen/Payment/View/amount_payment.dart';
 
 void main() {
   runApp(const MaterialApp(

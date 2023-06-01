@@ -11,6 +11,8 @@ abstract class Routes {
   static const verify = _Paths.verify;
   static const setnewpassword = _Paths.setnewpassword;
   static const overview = _Paths.overview;
+  static const amountReceived = _Paths.amountReceived;
+  static const purchaseCash = _Paths.purchaseCash;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const verify = '/verify';
   static const setnewpassword = '/setnewpassword';
   static const overview = '/overview';
+  static const amountReceived = '/amountReceived';
+  static const purchaseCash = '/purchaseCash';
 }
