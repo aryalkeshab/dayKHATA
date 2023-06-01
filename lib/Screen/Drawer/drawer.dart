@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_app/Core/routes/app_pages.dart';
 import 'package:my_app/Screen/Purchase/purchase_credit_screen.dart';
 
+import '../../Core/resources/colors.dart';
 import '../Payment/View/amount_received.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -35,6 +36,45 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     fit: BoxFit.contain,
                   )),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text('Welcome Binayak Pokhrel'),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 2,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                          color: Colors.blue[100],
+                          borderRadius: BorderRadius.circular(50)),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.logout_outlined,
+                        ),
+                      )),
+                ),
+              ],
+            ),
+            // SizedBox(
+            //   height: 10,
+            //   child: ListTile(
+            //     title: const Text('Welcome Binayak Pokhrel '),
+            //     trailing: const Icon(Icons.logout_outlined),
+            //     onTap: () {
+            //       // Navigator.pop(context);
+            //       Get.toNamed(Routes.login);
+            //     },
+            //   ),
+            // ),
+            const Divider(),
             ListTile(
               leading: const Icon(
                 Icons.desktop_mac_outlined,

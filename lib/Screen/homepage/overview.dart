@@ -19,12 +19,6 @@ class _OverviewState extends State<Overview> {
       appBar: AppBar(
         title: const Text('Dashboard'),
         backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
-        // actions: const [
-        //   Icon(
-        //     Icons.menu,
-        //     textDirection: TextDirection.rtl,
-        //   ),
-        // ],
       ),
       drawer: const CustomDrawer(),
       body: SafeArea(
