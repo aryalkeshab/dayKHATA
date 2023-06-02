@@ -17,32 +17,34 @@ class Newpassword extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(children: [
             const SizedBox(height: 20),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
-              const SizedBox(width: 10),
-              SizedBox(
-                width: 40,
-                height: 40,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return const Verificationpage();
-                      }),
-                    );
-                  },
-                  backgroundColor: primarycolor,
-                  child: const Icon(Icons.arrow_back),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.verify);
+                    },
+                    backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
+                    child: const Icon(Icons.arrow_back),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 15),
-              Text(
-                'New Password',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: primarycolor,
-                    fontWeight: FontWeight.bold),
-              ),
-            ]),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'New Password',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: primarycolor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             SizeConfig(context).verticalSpaceMedium(),
             Container(
               height: 180,

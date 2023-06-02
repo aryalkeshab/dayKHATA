@@ -122,6 +122,7 @@ class _OverviewState extends State<Overview> {
                                   )
                                 ],
                               ),
+                              SizeConfig(context).verticalSpaceSmall(),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
