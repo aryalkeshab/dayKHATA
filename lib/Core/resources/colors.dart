@@ -26,5 +26,7 @@ import 'package:flutter/material.dart';
 
 Color primarycolor = const Color(0xFF311ABB);
 Color whiteColor = const Color(0xFFFFFFFF);
+Color blackColor = Colors.black;
+Color iconColor = Color.fromARGB(255, 179, 24, 24);
 Color greyColor = const Color(0xFFCCCCCC);
 Color greenColor = const Color(0xFF00FF00);
