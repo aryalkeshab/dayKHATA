@@ -67,6 +67,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   buildDrawerItem(
                     text: 'Dashboard',
                     icon: Icons.computer_outlined,
+                    iconColor: Get.currentRoute == Routes.dashboard
+                        ? Colors.white
+                        : drawerIconColor,
                     textIconColor: Get.currentRoute == Routes.dashboard
                         ? Colors.white
                         : Colors.black,
@@ -109,6 +112,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   buildDrawerItem(
                     text: 'Stock',
+                    iconColor: Get.currentRoute == Routes.stock
+                        ? Colors.white // Set the desired color for the icon
+                        : drawerIconColor,
                     icon: Icons.window,
                     textIconColor: Get.currentRoute == Routes.stock
                         ? Colors.white
@@ -236,6 +242,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   buildDrawerItem(
                     text: 'Journal Voucher',
                     icon: Icons.window,
+                    iconColor: Get.currentRoute == Routes.journalVoucher
+                        ? Colors.white
+                        : drawerIconColor,
                     textIconColor: Get.currentRoute == Routes.journalVoucher
                         ? Colors.white
                         : Colors.black,
@@ -246,6 +255,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   ExpansionTile(
                     title: const Text('Account Report'),
+                    iconColor: Get.currentRoute == Routes.profitAndLoss
+                        ? Colors.white // Set the desired color for the icon
+                        : const Color.fromARGB(255, 90, 89, 89),
                     leading: const Icon(Icons.settings_outlined),
                     childrenPadding: const EdgeInsets.only(left: 5),
                     children: [
@@ -293,6 +305,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   buildDrawerItem(
                     text: 'About Us',
+                    iconColor: Get.currentRoute == Routes.aboutUs
+                        ? Colors.white // Set the desired color for the icon
+                        : drawerIconColor,
                     icon: Icons.help,
                     textIconColor: Get.currentRoute == Routes.aboutUs
                         ? Colors.white
@@ -317,10 +332,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
     required Color textIconColor,
     required Color? tileColor,
     required VoidCallback onTap,
+    final Color? iconColor, // New parameter for icon color
   }) {
     return ListTile(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      leading: Icon(icon, color: textIconColor),
+      leading: Icon(icon, color: iconColor),
       title: Text(
         text,
         style: TextStyle(color: textIconColor),
