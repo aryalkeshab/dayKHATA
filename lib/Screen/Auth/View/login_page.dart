@@ -33,111 +33,108 @@ class _LoginPageState extends State<LoginPage> {
     final loginParams = LoginParams();
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: GetBuilder<LoginController>(
-            builder: (controller) {
-              return Center(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        child: Image.asset('asset/images/dayimage.png'),
+        body: GetBuilder<LoginController>(
+          builder: (controller) {
+            return Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(2),
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      child: Image.asset('asset/images/dayimage.png'),
+                    ),
+                    SizeConfig(context).verticalSpaceMedium(),
+                    CustomTextField(
+                      borderRadius: BorderRadius.circular(10),
+                      hint: " Email address",
+                      leadingIcon: const Icon(
+                        Icons.email,
                       ),
-                      SizeConfig(context).verticalSpaceMedium(),
-                      CustomTextField(
-                        borderRadius: BorderRadius.circular(10),
-                        hint: " Email address",
-                        leadingIcon: const Icon(
-                          Icons.email,
-                        ),
-                        validator: (value) => Validator.validateEmail(value!),
-                        onSaved: (value) {
-                          loginParams.email = value;
-                        },
-                        onChanged: (value) {
-                          // loginParams.email = value;
-                        },
-                        keyboardType: TextInputType.emailAddress,
+                      validator: (value) => Validator.validateEmail(value!),
+                      onSaved: (value) {
+                        loginParams.email = value;
+                      },
+                      onChanged: (value) {
+                        // loginParams.email = value;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizeConfig(context).verticalSpaceMedium(),
+                    CustomTextField(
+                      hint: "Password",
+                      borderRadius: BorderRadius.circular(10),
+                      leadingIcon: const Icon(
+                        Icons.lock,
+                        size: 30,
                       ),
-                      SizeConfig(context).verticalSpaceMedium(),
-                      CustomTextField(
-                        hint: "Password",
-                        borderRadius: BorderRadius.circular(10),
-                        leadingIcon: const Icon(
-                          Icons.lock,
-                          size: 30,
-                        ),
-                        keyboardType: TextInputType.visiblePassword,
-                        isPasswordField: true,
-                        validator: (value) =>
-                            Validator.validatePassword(value!),
-                        onSaved: (value) {
-                          loginParams.password = value;
-                        },
-                        onChanged: (value) {
-                          // loginParams.password = value;
-                          // print(value);
-                        },
-                      ),
-                      SizeConfig(context).verticalSpaceMedium(),
-                      PrimaryButton(
-                        label: "Login",
-                        onPressed: () {
-                          // Get.toNamed(Routes.signup);
+                      keyboardType: TextInputType.visiblePassword,
+                      isPasswordField: true,
+                      validator: (value) => Validator.validatePassword(value!),
+                      onSaved: (value) {
+                        loginParams.password = value;
+                      },
+                      onChanged: (value) {
+                        // loginParams.password = value;
+                        // print(value);
+                      },
+                    ),
+                    SizeConfig(context).verticalSpaceMedium(),
+                    PrimaryButton(
+                      label: "Login",
+                      onPressed: () {
+                        // Get.toNamed(Routes.signup);
 
-                          final currentState = _formKey.currentState;
-                          if (currentState != null) {
-                            currentState.save();
-                            if (currentState.validate()) {
-                              Get.find<LoginController>()
-                                  .requestLogin(context, loginParams);
-                            }
+                        final currentState = _formKey.currentState;
+                        if (currentState != null) {
+                          currentState.save();
+                          if (currentState.validate()) {
+                            Get.find<LoginController>()
+                                .requestLogin(context, loginParams);
                           }
-                        },
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        color: primarycolor,
-                        icon: const Icon(Icons.refresh_sharp),
-                      ),
-                      SizeConfig(context).verticalSpaceMedium(),
-                      InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.signup);
-                        },
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        child: RichText(
-                          text: TextSpan(
-                            text: "Don't have an account? ",
-                            style: TextStyle(
-                                color: primarycolor,
-                                //   color: primarycolor,,
+                        }
+                      },
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      color: primarycolor,
+                      icon: const Icon(Icons.refresh_sharp),
+                    ),
+                    SizeConfig(context).verticalSpaceMedium(),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.signup);
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: TextStyle(
+                              color: primarycolor,
+                              //   color: primarycolor,,
+                              fontFamily: 'Poppins',
+                              fontSize: 20),
+                          children: const <TextSpan>[
+                            TextSpan(
+                              text: "Sign Up",
+                              style: TextStyle(
                                 fontFamily: 'Poppins',
-                                fontSize: 20),
-                            children: const <TextSpan>[
-                              TextSpan(
-                                text: "Sign Up",
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

@@ -31,6 +31,7 @@ class _AmountReceivedState extends State<AmountReceived> {
       ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 50),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -299,6 +300,13 @@ class _AmountReceivedState extends State<AmountReceived> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        backgroundColor: Colors.blue[300],
+        child: const Icon(Icons.home),
       ),
     );
   }
