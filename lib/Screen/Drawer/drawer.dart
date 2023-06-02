@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Core/resources/colors.dart';
@@ -36,7 +37,32 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 const Text('Welcome Binayak Pokhrel'),
                 InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.login);
+                    // Get.toNamed(Routes.login);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: const Text('Logout'),
+                          content: const Text('Are you sure to Logout ?'),
+                          actions: [
+                            CupertinoDialogAction(
+                              child: const Text('OK'),
+                              onPressed: () {
+                                // Navigator.of(context).pop();
+                                Get.toNamed(Routes.login);
+                                // Get.offAll(Routes.login);
+                              },
+                            ),
+                            CupertinoDialogAction(
+                              child: const Text('Cancel'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   child: Container(
                       decoration: BoxDecoration(
