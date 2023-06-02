@@ -36,13 +36,18 @@ class Forgetpassword extends StatelessWidget {
                     child: const Icon(Icons.arrow_back),
                   ),
                 ),
-                SizeConfig(context).verticalSpaceMedium(),
-                Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: primarycolor,
-                      fontWeight: FontWeight.bold),
+                // SizeConfig(context).horizontalSpaceMedium(),
+
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Forgot Password',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: primarycolor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ],
             ),

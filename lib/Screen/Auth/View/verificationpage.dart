@@ -5,6 +5,7 @@ import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
 import '../../../Core/utils/size_config.dart';
 import '../../../Core/widgets/buttons.dart';
+import 'forgotpassword.dart';
 
 class Verificationpage extends StatefulWidget {
   const Verificationpage({Key? key}) : super(key: key);
@@ -47,70 +48,71 @@ class _VerificationpageState extends State<Verificationpage> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Verification',
-            style: TextStyle(
-              color: primarycolor,
-            ),
-          ),
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: primarycolor,
-              ),
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed(Routes.login);
-                },
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          elevation: 0,
-          backgroundColor: Colors.white,
-        ),
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: Text(
+        //     'Verification',
+        //     style: TextStyle(
+        //       color: primarycolor,
+        //     ),
+        //   ),
+        //   leading: Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: Container(
+        //       decoration: BoxDecoration(
+        //         borderRadius: BorderRadius.circular(50),
+        //         color: primarycolor,
+        //       ),
+        //       child: InkWell(
+        //         onTap: () {
+        //           Get.toNamed(Routes.login);
+        //         },
+        //         child: const Icon(
+        //           Icons.arrow_back,
+        //           color: Colors.white,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   elevation: 0,
+        //   backgroundColor: Colors.white,
+        // ),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 20),
-
-                // Row(
-                //     mainAxisAlignment: MainAxisAlignment.start,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: <Widget>[
-                //       const SizedBox(width: 10),
-                //       SizedBox(
-                //         width: 40,
-                //         height: 40,
-                //         child: FloatingActionButton(
-                //           onPressed: () {
-                //             Navigator.of(context).push(MaterialPageRoute(
-                //                 builder: (BuildContext context) {
-                //               return const Forgetpassword();
-                //             }));
-                //           },
-                //           backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
-                //           child: const Icon(Icons.arrow_back),
-                //         ),
-                //       ),
-                //       const Text(
-                //         'Verification',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           fontSize: 20,
-                //           fontWeight: FontWeight.w600,
-                //             color: primarycolor,,
-                //         ),
-                //       ),
-                //     ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(width: 10),
+                    SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return const Forgetpassword();
+                          }));
+                        },
+                        backgroundColor: const Color.fromRGBO(49, 26, 187, 1),
+                        child: const Icon(Icons.arrow_back),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          'Verification',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: primarycolor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizeConfig(context).verticalSpaceMedium(),
                 Container(
                   height: 180,
@@ -140,7 +142,6 @@ class _VerificationpageState extends State<Verificationpage> {
                   ),
                 ),
                 SizeConfig(context).verticalSpaceMedium(),
-
                 Pinput(
                   defaultPinTheme: defaultPinTheme,
                   focusedPinTheme: focusedPinTheme,
@@ -154,7 +155,6 @@ class _VerificationpageState extends State<Verificationpage> {
                   showCursor: true,
                   // onCompleted: (pin) => print(pin),
                 ),
-
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(

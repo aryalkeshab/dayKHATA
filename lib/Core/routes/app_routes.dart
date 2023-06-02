@@ -16,6 +16,14 @@ abstract class Routes {
   static const purchaseCredit = _Paths.purchaseCredit;
   static const amountPayment = _Paths.amountPayment;
   static const journalVoucher = _Paths.journalVoucher;
+
+  // remaining pages
+  static const profitAndLoss = _Paths.profitAndLoss;
+  static const balanceSheet = _Paths.balanceSheet;
+  static const trailBalance = _Paths.trailBalance;
+  static const dayBook = _Paths.dayBook;
+  static const aboutUs = _Paths.aboutUs;
+  static const stock = _Paths.stock;
 }
 
 abstract class _Paths {
@@ -31,4 +39,12 @@ abstract class _Paths {
   static const purchaseCredit = '/purchaseCredit';
   static const amountPayment = '/amountPayment';
   static const journalVoucher = '/journalVoucher';
+
+  // remaining pages
+  static const stock = '/stock';
+  static const profitAndLoss = '/profitAndLoss';
+  static const balanceSheet = '/balanceSheet';
+  static const trailBalance = '/trialBalance';
+  static const dayBook = '/dayBook';
+  static const aboutUs = '/aboutUs';
 }
