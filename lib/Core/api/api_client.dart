@@ -94,7 +94,7 @@ class ApiClient {
         queryParameters: queryParameters,
         options: options ?? Options(headers: {"requiresToken": false}),
       );
-      print(response);
+      // print(response);
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());

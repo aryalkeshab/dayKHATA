@@ -1,11 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
 import 'package:my_app/Core/widgets/buttons.dart';
 import 'package:my_app/Screen/Drawer/drawer.dart';
 import '../../../Core/resources/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:masked_text_field/masked_text_field.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../Core/utils/size_config.dart';
+
+import 'package:dropdown_search/dropdown_search.dart';
+
+import '../Controller/amount_received_controller.dart';
 
 class AmountReceived extends StatefulWidget {
   AmountReceived({Key? key}) : super(key: key);
@@ -16,10 +24,22 @@ class AmountReceived extends StatefulWidget {
 
 class _AmountReceivedState extends State<AmountReceived> {
   TextEditingController dateController = TextEditingController();
+
   TextEditingController playrNameController = TextEditingController();
 
-  final dropdownItems = ['Cash', 'Bank'];
-  String? value;
+//for search functionality
+  FocusNode searchFocusNode = FocusNode();
+  TextEditingController searchController = TextEditingController();
+
+  // final dropdownItems = ['Cash', 'Bank'];
+  // String? value;
+  @override
+  void initState() {
+    Get.put(AmountReceivedController());
+    super.initState();
+  }
+
+  final selecteditem = null;
 
   @override
   Widget build(BuildContext context) {
@@ -92,53 +112,72 @@ class _AmountReceivedState extends State<AmountReceived> {
                           text: 'Date:',
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
                               child: CustomContainer(
                                 padding: const EdgeInsets.all(5),
-                                child: TextFormField(
-                                  onTap: () async {
-                                    DateTime? pickeddate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(2000),
-                                        lastDate: DateTime(2101));
-
-                                    if (pickeddate != null) {
-                                      dateController.text =
-                                          DateFormat('yyy-MM-dd')
-                                              .format(pickeddate);
-                                      setState(() {
-                                        dateController.text =
-                                            DateFormat('yyy-MM-dd')
-                                                .format(pickeddate);
-                                      });
-                                    }
+                                child: MaskedTextField(
+                                  textFieldController: dateController,
+                                  inputDecoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      // enabledBorder: OutlineInputBorder(
+                                      //     borderRadius: BorderRadius.zero,
+                                      //     borderSide: BorderSide(
+                                      //         color: Colors.transparent)),
+                                      hintText: 'DD/MM/YYYY',
+                                      counterText: ""),
+                                  autofocus: true,
+                                  mask: 'xx/xx/xxxx',
+                                  maxLength: 10,
+                                  keyboardType: TextInputType.number,
+                                  onChange: (String value) {
+                                    print(value);
                                   },
-                                  controller: dateController,
-                                  cursorColor: primarycolor,
-                                  decoration: InputDecoration(
-                                    // icon: Icon(Icons.calendar_month),
-                                    border: const OutlineInputBorder(),
-                                    focusedBorder: const OutlineInputBorder(),
-                                    enabledBorder: const OutlineInputBorder(),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 8,
-                                      horizontal: 5,
-                                    ),
-                                    hintText: 'mm-dd-yyyy',
-                                    suffixIcon: Icon(
-                                      Icons.calendar_month,
-                                      color: greyColor,
-                                    ),
-                                  ),
-                                  // onChanged: () {},
                                 ),
+
+                                // TextFormField(
+                                //   onTap: () async {
+                                //     DateTime? pickeddate = await showDatePicker(
+                                //         context: context,
+                                //         initialDate: DateTime.now(),
+                                //         firstDate: DateTime(2000),
+                                //         lastDate: DateTime(2101));
+
+                                //     if (pickeddate != null) {
+                                //       dateController.text =
+                                //           DateFormat('yyy-MM-dd')
+                                //               .format(pickeddate);
+                                //       setState(() {
+                                //         dateController.text =
+                                //             DateFormat('yyy-MM-dd')
+                                //                 .format(pickeddate);
+                                //       });
+                                //     }
+                                //   },
+                                //   controller: dateController,
+                                //   cursorColor: primarycolor,
+                                //   decoration: InputDecoration(
+                                //     // icon: Icon(Icons.calendar_month),
+                                //     border: const OutlineInputBorder(),
+                                //     focusedBorder: const OutlineInputBorder(),
+                                //     enabledBorder: const OutlineInputBorder(),
+                                //     contentPadding: const EdgeInsets.symmetric(
+                                //       vertical: 8,
+                                //       horizontal: 5,
+                                //     ),
+                                //     hintText: 'mm-dd-yyyy',
+                                //     suffixIcon: Icon(
+                                //       Icons.calendar_month,
+                                //       color: greyColor,
+                                //     ),
+                                //   ),
+                                //   // onChanged: () {},
+                                // ),
                               ),
                             ),
-                            // const Icon(Icons.calendar_month)
                           ],
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
@@ -146,56 +185,190 @@ class _AmountReceivedState extends State<AmountReceived> {
                           text: 'Payer Name:',
                         ),
                         SizeConfig(context).verticalSpaceSmall(),
-                        CustomContainer(
-                          padding: const EdgeInsets.all(5),
-                          child: TextFormField(
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              focusedBorder: const OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                // borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 5),
-                              hintText: 'Enter Name of Player',
+                        GetBuilder<AmountReceivedController>(
+                            init: AmountReceivedController(),
+                            builder: (controller) {
+                              return CustomContainer(
+                                padding: const EdgeInsets.all(5),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
+                                    // Set focus on the search bar and open the dropdown
+                                    setState(() {
+                                      searchController.text =
+                                          ''; // Clear the search bar text
+                                      // Add any additional logic here if needed
+                                    });
+                                  },
+                                  child: DropdownSearch<String>(
+                                    onChanged: (val) {
+                                      // Get.put(AmountReceivedController()
+                                      //     .getUserList(val.toString()));
+                                      controller.getUserList(val.toString());
+                                      print(val);
+                                    },
+                                    // enabled: true,
+                                    selectedItem: selecteditem,
+                                    popupProps: PopupProps.dialog(
+                                      showSelectedItems: true,
+                                      showSearchBox: true,
+                                      searchDelay: const Duration(seconds: 2),
+                                      searchFieldProps: TextFieldProps(
+                                        cursorColor: Colors.black,
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 20),
+                                          hintText: "Account Name",
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            borderSide: BorderSide(
+                                                color: primarycolor,
+                                                width: 2.0),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            borderSide: BorderSide(
+                                                color: primarycolor,
+                                                width: 2.0),
+                                          ),
+                                          hoverColor: Colors.grey,
+                                          border: const OutlineInputBorder(),
+                                        ),
+                                        autofocus: true,
+                                        enableSuggestions: true,
 
-                              // label: Text(title),
-                            ),
-                          ),
-                        ),
+                                        // focusNode:
+                                      ),
+
+                                      // disabledItemFn: (String s) => s.startsWith('I'),
+                                    ),
+                                    items: controller.usernameList,
+                                    // items: const [
+                                    //   "Brazil",
+                                    //   "Italia (Disabled)",
+                                    //   "Tunisia",
+                                    //   'Canada',
+                                    //   "Albania",
+                                    //   "Algeria",
+                                    //   "Andorra",
+                                    //   "Angola",
+                                    //   "Antigua and Barbuda",
+                                    //   "Argentina",
+                                    //   "Armenia",
+                                    //   "Australia",
+                                    //   "Austria",
+                                    // ],p
+                                    dropdownDecoratorProps:
+                                        const DropDownDecoratorProps(
+                                      dropdownSearchDecoration: InputDecoration(
+                                        enabledBorder: OutlineInputBorder(),
+                                        focusedBorder: OutlineInputBorder(),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 5),
+                                        iconColor: Colors.white,
+                                        suffixIconColor: Colors.white,
+                                        hintText: "Enter a payer name",
+                                        border: UnderlineInputBorder(
+                                          borderSide: BorderSide
+                                              .none, // Removes the underline
+                                        ),
+                                        icon: null,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                        // GetBuilder<AmountReceivedController>(
+                        //     builder: (controller) {
+                        //   final response = controller.userListApiResponse;
+                        //   return
+                        //   CustomContainer(
+                        //     padding: const EdgeInsets.all(5),
+                        //     child: DropdownSearch<String>(
+                        //       popupProps: const PopupProps.menu(
+                        //         showSelectedItems: true,
+
+                        //         showSearchBox: true,
+                        //         // disabledItemFn: (String s) => s.startsWith('I'),
+                        //       ),
+                        //       // items:ListView.builder(itemBuilder: itemBuilder) ,
+                        //       const items: [
+                        //         "Brazil",
+                        //         "Italia (Disabled)",
+                        //         "Tunisia",
+                        //         'Canada',
+                        //         "Albania",
+                        //         "Algeria",
+                        //         "Andorra",
+                        //         "Angola",
+                        //         "Antigua and Barbuda",
+                        //         "Argentina",
+                        //         "Armenia",
+                        //         "Australia",
+                        //         "Austria",
+                        //       ],
+                        //       dropdownDecoratorProps:
+                        //           const DropDownDecoratorProps(
+                        //         dropdownSearchDecoration: InputDecoration(
+                        //           enabledBorder: OutlineInputBorder(),
+                        //           focusedBorder: OutlineInputBorder(),
+                        //           contentPadding: EdgeInsets.symmetric(
+                        //               vertical: 8, horizontal: 5),
+                        //           iconColor: Colors.white,
+                        //           suffixIconColor: Colors.white,
+                        //           hintText: "Enter a payer name",
+                        //           border: UnderlineInputBorder(
+                        //             borderSide: BorderSide
+                        //                 .none, // Removes the underline
+                        //           ),
+                        //           icon: null,
+                        //           prefixIcon: null,
+                        //           suffix: SizedBox.shrink(),
+                        //         ),
+                        //       ),
+                        //       onChanged: (val) {
+                        //         print(val);
+                        //       },
+                        //       selectedItem: selecteditem,
+                        //     ),
+                        //   );
+                        // }),
                         SizeConfig(context).verticalSpaceSmall(),
-                        const CustomContainer(
-                          text: 'Cash Or Bank:',
-                        ),
-                        SizeConfig(context).verticalSpaceSmall(),
-                        CustomContainer(
-                          padding: const EdgeInsets.all(5),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                style: BorderStyle.solid,
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                  hint: const Text('Select an option'),
-                                  items:
-                                      dropdownItems.map(buildMenuItem).toList(),
-                                  value: value,
-                                  isExpanded: true,
-                                  onChanged: (value) => setState(() {
-                                        this.value = value;
-                                      })),
-                            ),
-                          ),
-                        ),
-                        SizeConfig(context).verticalSpaceSmall(),
+                        // const CustomContainer(
+                        //   text: 'Cash Or Bank:',
+                        // ),
+                        // SizeConfig(context).verticalSpaceSmall(),
+                        // CustomContainer(
+                        //   padding: const EdgeInsets.all(5),
+                        //   child: Container(
+                        //     padding: const EdgeInsets.symmetric(horizontal: 5),
+                        //     decoration: BoxDecoration(
+                        //       border: Border.all(
+                        //         style: BorderStyle.solid,
+                        //         width: 1,
+                        //         color: Colors.black,
+                        //       ),
+                        //       borderRadius: BorderRadius.circular(5),
+                        //     ),
+                        //     child: DropdownButtonHideUnderline(
+                        //       child: DropdownButton<String>(
+                        //           hint: const Text('Select an option'),
+                        //           items:
+                        //               dropdownItems.map(buildMenuItem).toList(),
+                        //           value: value,
+                        //           isExpanded: true,
+                        //           onChanged: (value) => setState(() {
+                        //                 this.value = value;
+                        //               })),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizeConfig(context).verticalSpaceSmall(),
                         const CustomContainer(
                           text: 'Total Amount: ',
                         ),
@@ -214,7 +387,7 @@ class _AmountReceivedState extends State<AmountReceived> {
                               ),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 5),
-                              hintText: 'Enter Total AMount',
+                              hintText: 'Enter Total Amount',
 
                               // label: Text(title),
                             ),

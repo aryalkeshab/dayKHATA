@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ import '../api/api_constant.dart';
 import '../api/api_result.dart';
 import '../api/network_exception.dart';
 import '../api/network_info.dart';
+import '../utils/storage_constants.dart';
 
 class ApiRequest {
   late final _apiClient = Get.find<ApiClient>();
@@ -35,9 +38,11 @@ class ApiRequest {
         // await secureStorage.write(
         //     key: Constants.accessToken, value: accessToken);
 
+        // final message = response["message"];
+        // await secureStorage.write(key: Constants.message, value: message);
         return ApiResponse(data: response);
       } catch (e) {
-        // print('Error : $e');
+        print('Error : $e');
         return ApiResponse(error: NetworkException.getException(e));
       }
     } else {
@@ -56,6 +61,31 @@ class ApiRequest {
 
         return ApiResponse(data: response);
       } catch (e) {
+        return ApiResponse(error: NetworkException.getException(e));
+      }
+    } else {
+      return ApiResponse(error: NetworkException.noInternetConnection());
+    }
+  }
+
+  Future<dynamic> userlist(String keyword) async {
+    if (await networkInfo.isConnected) {
+      print(APIPathHelper.authAPIs(
+        APIPath.userList,
+      ));
+      try {
+        final response = await _apiClient.get(
+          APIPathHelper.userListAPIs(
+            APIPath.userList,
+            keyword: keyword,
+          ),
+        );
+        // print(response);
+        // print('xys');
+
+        return ApiResponse(data: response["data"]);
+      } catch (e) {
+        // print('$e');
         return ApiResponse(error: NetworkException.getException(e));
       }
     } else {

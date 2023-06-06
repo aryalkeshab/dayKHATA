@@ -105,6 +105,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.6"
+  dropdown_search:
+    dependency: "direct main"
+    description:
+      name: dropdown_search
+      sha256: "55106e8290acaa97ed15bea1fdad82c3cf0c248dd410e651f5a8ac6870f783ab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.6"
   equatable:
     dependency: "direct main"
     description:
@@ -304,6 +312,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.3"
+  mask_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: mask_text_input_formatter
+      sha256: "19bb7809c3c2559277e95521b3ee421e1409eb2cc85efd2feb191696c92490f4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
+  masked_text_field:
+    dependency: "direct main"
+    description:
+      name: masked_text_field
+      sha256: "35f9d09cb8c117df5c6b4f945f241432555ff9d16520e3636fdb86780a34972b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   matcher:
     dependency: transitive
     description:
@@ -328,6 +352,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  nepali_date_picker:
+    dependency: "direct main"
+    description:
+      name: nepali_date_picker
+      sha256: d74e0237a63c0b43b53ab82e1bf6e30423bfd15c6abea208147abad405012b39
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.1"
+  nepali_utils:
+    dependency: transitive
+    description:
+      name: nepali_utils
+      sha256: "76e896b08270c8f0e9365cf2ce9f8f5cd0fcd47b29d3b4baedef3ce88b7126a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3"
   path:
     dependency: transitive
     description:

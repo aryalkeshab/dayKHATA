@@ -1,4 +1,4 @@
-enum APIPath { login, register, ticket, categoryList }
+enum APIPath { login, register, ticket, categoryList, userList }
 // class APIPath {
 
 // }
@@ -24,6 +24,19 @@ class APIPathHelper {
 
       case APIPath.register:
         return "/addAdminUser";
+      default:
+        return "";
+    }
+  }
+
+  static String userListAPIs(
+    APIPath path, {
+    String? keyword,
+    String? id,
+  }) {
+    switch (path) {
+      case APIPath.userList:
+        return "/searchPartyName/$keyword/Sundry Debtors/2";
       default:
         return "";
     }

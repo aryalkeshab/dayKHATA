@@ -22,12 +22,19 @@ class AppPages {
   final initial = Routes.splash;
 
   static final routes = [
-    GetPage(name: _Paths.splash, page: SplashScreen.new, bindings: [
-      CoreBindings(),
-    ]),
+    GetPage(
+      name: _Paths.splash,
+      page: SplashScreen.new,
+      bindings: [
+        CoreBindings(),
+      ],
+    ),
     GetPage(
       name: _Paths.login,
       page: LoginPage.new,
+      bindings: [
+        CoreBindings(),
+      ],
     ),
     GetPage(
       name: _Paths.signup,

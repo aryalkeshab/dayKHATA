@@ -1,66 +1,66 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'dart:convert';
 
-// class AmountReceivedController extends GetxController {
-//   @override
-//   void onInit() {
-//     // TODO: implement onInit
-//     super.onInit();
-//   }
+import 'package:get/get.dart';
 
-//   showButtonSheet(BuildContext context) {
-//     return showModalBottomSheet(
-//       context: context,
-//       shape: const RoundedRectangleBorder(
-//         borderRadius: BorderRadius.vertical(
-//           top: Radius.circular(18.0),
-//         ),
-//       ),
-//       builder: ((builder) {
-//         return const SizedBox(
-//           height: 120,
-//           child: Column(
-//             children: <Widget>[
-//               SizedBox(
-//                 height: 10,
-//               ),
-//               Text(
-//                 "Choose profile photo",
-//                 style: TextStyle(
-//                   fontSize: 20.0,
-//                 ),
-//               ),
-//               Divider(),
-//               Row(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: <Widget>[
-//                     // if (widget.showCameraIcon)
-//                     // ElevatedButton(
-//                     //   icon: Icons.camera_alt_outlined,
-//                     //   name: "Camera",
-//                     //   ontap: () async {
-//                     //     // takePhoto(ImageSource.camera);
-//                     //     imageFile = await imagePicker(ImageSource.camera);
-//                     //     update();
-//                     //   },
-//                     // ),
-//                     // SBC.lW,
-//                     SizedBox(
-//                       width: 20,
-//                     ),
-//                     // CustomIconButton(
-//                     //   icon: Icons.image,
-//                     //   name: "Gallery",
-//                     //   ontap: () async {
-//                     //     imageFile = await imagePicker(ImageSource.gallery);
-//                     //     update();
-//                     //   },
-//                     // ),
-//                   ])
-//             ],
-//           ),
-//         );
-//       }),
-//     );
-//   }
+import '../../../Core/api/api_result.dart';
+import '../../../Core/api_request/api_request.dart';
+import '../Model/Response/user_list_response.dart';
+
+class AmountReceivedController extends GetxController {
+  final ApiRequest _apiRequest = ApiRequest();
+
+  @override
+  void onInit() {
+    getUserList("");
+
+    super.onInit();
+  }
+
+  ApiResponse _userListApiResponse = ApiResponse();
+
+  List<UserListResponse> userListResponse = [];
+  List<String> usernameList = [];
+  set userListApiResponse(ApiResponse userListApiResponse) {
+    _userListApiResponse = userListApiResponse;
+    update();
+  }
+
+  ApiResponse get userListApiResponse => _userListApiResponse;
+
+  void getUserList(String keyword) async {
+    // showLoadingDialog(context);
+
+    userListResponse = []; //before making api request this list is cleared
+    usernameList = [];
+
+    userListApiResponse = await _apiRequest.userlist(keyword);
+
+    // print(userListApiResponse );
+    // print('h7');
+    //this above line api requires is made here and the results stored on userListApiResponse
+
+    if (userListApiResponse.hasData) {
+      // Map<String, dynamic> jsonResponse = jsonDecode(userListApiResponse.data);
+      // print(jsonResponse);
+
+      // userListResponse = UserListResponse.fromJson(jsonResponse);
+      userListResponse = userListApiResponse.data
+          .map<UserListResponse>(
+              (product) => UserListResponse.fromJson(product))
+          .toList();
+      for (var element in userListResponse) {
+        usernameList.add(element.acname.toString());
+      }
+      print(userListResponse);
+      print(userListResponse.first.acname);
+    } else if (userListApiResponse.hasError) {
+      Get.snackbar('Oops', userListApiResponse.error.toString());
+    } else {
+      Get.snackbar('Ops', 'Something went wrong');
+    }
+  }
+}
+
+
+
 // }

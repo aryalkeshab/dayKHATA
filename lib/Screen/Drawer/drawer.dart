@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:my_app/Core/resources/colors.dart';
 import 'package:my_app/Core/routes/app_pages.dart';
+
+import '../../Core/utils/storage_constants.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -12,6 +15,20 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
+  final secureStorage = Get.find<FlutterSecureStorage>();
+
+  String? message;
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    message = await secureStorage.read(key: Constants.message);
+    setState(() {}); // Trigger widget rebuild after getting the email
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +51,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text('Welcome Binayak Pokhrel'),
+                Text(message ?? ''),
+                // Text('Welcome Binanoyak Pokhrel'),
                 InkWell(
                   onTap: () {
                     // Get.toNamed(Routes.login);

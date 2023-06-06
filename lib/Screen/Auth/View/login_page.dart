@@ -3,6 +3,7 @@ import 'package:my_app/Core/utils/custom_validators.dart';
 import 'package:my_app/Screen/Auth/Controller/login_controller.dart';
 import 'package:my_app/Screen/Auth/View/forgotpassword.dart';
 import 'package:get/get.dart';
+import 'package:my_app/Screen/Payment/Controller/amount_received_controller.dart';
 import '../../../Core/resources/colors.dart';
 import '../../../Core/routes/app_pages.dart';
 import '../../../Core/utils/size_config.dart';
@@ -97,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                                 .requestLogin(context, loginParams);
                           }
                         }
+                        // Get.put(AmountReceivedController()).getUserList('su');
                       },
                       width: MediaQuery.of(context).size.width * 0.9,
                       color: primarycolor,

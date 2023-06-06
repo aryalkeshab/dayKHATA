@@ -33,6 +33,7 @@ class LoginController extends GetxController {
 
     if (loginApiResponse.hasData) {
       Map<String, dynamic> jsonResponse = jsonDecode(loginApiResponse.data);
+      
       loginResponse = LoginResponse.fromJson(jsonResponse);
       if (loginResponse!.status == true) {
         showSuccessToast(loginResponse!.message.toString());

@@ -14,6 +14,5 @@ class ApiResponse<T> extends Equatable {
   bool get isInitial => !hasData && !hasError;
 
   @override
-  // TODO: implement props
   List<Object?> get props => [data, error];
 }
