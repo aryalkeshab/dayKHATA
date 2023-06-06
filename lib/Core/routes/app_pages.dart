@@ -9,6 +9,7 @@ import 'package:my_app/Screen/Payment/View/amount_received.dart';
 
 import '../../Screen/Auth/View/newpasswordpage.dart';
 import '../../Screen/Auth/View/verificationpage.dart';
+import '../../Screen/Payment/View/search_screen.dart';
 import '../../Screen/Purchase/purchase_credit_screen.dart';
 import '../../Screen/Purchase/purchase_screen.dart';
 import '../../Screen/Splash/splash.dart';
@@ -55,6 +56,10 @@ class AppPages {
     GetPage(
       name: _Paths.amountReceived,
       page: AmountReceived.new,
+    ),
+    GetPage(
+      name: _Paths.searchScreen,
+      page: SearchScreen.new,
     ),
     GetPage(
       name: _Paths.purchaseCash,

@@ -51,8 +51,8 @@ class AmountReceivedController extends GetxController {
       for (var element in userListResponse) {
         usernameList.add(element.acname.toString());
       }
-      print(userListResponse);
-      print(userListResponse.first.acname);
+      // print(userListResponse);
+      // print(userListResponse.first.acname);
     } else if (userListApiResponse.hasError) {
       Get.snackbar('Oops', userListApiResponse.error.toString());
     } else {

@@ -16,6 +16,7 @@ abstract class Routes {
   static const purchaseCredit = _Paths.purchaseCredit;
   static const amountPayment = _Paths.amountPayment;
   static const journalVoucher = _Paths.journalVoucher;
+  static const searchScreen = _Paths.searchScreen;
 
   // remaining pages
   static const profitAndLoss = _Paths.profitAndLoss;
@@ -39,6 +40,7 @@ abstract class _Paths {
   static const purchaseCredit = '/purchaseCredit';
   static const amountPayment = '/amountPayment';
   static const journalVoucher = '/journalVoucher';
+  static const searchScreen = '/searchScreen';
 
   // remaining pages
   static const stock = '/stock';
